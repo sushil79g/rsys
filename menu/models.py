@@ -14,7 +14,7 @@ class Food(models.Model):
     course = models.CharField(max_length=30, choices=course_choice, default='snacks')
     price = models.PositiveIntegerField(default=0)
     available = models.BooleanField(default=True)
-    order = models.ForeignKey('Order', null=True, blank=True)
+#     order = models.ForeignKey('Order', null=True, blank=True)
     image = models.ImageField(upload_to='media/food/', null=True, blank=True)
     descriptionm = models.TextField(max_length=400, help_text='Enter a short description of this food', null=True, blank=True)
 
@@ -35,7 +35,7 @@ class Drink(models.Model):
     drink_type = models.CharField(max_length=30, choices=drink_choice, default='soft drink')
     available = models.BooleanField(default=True)
     price = models.PositiveIntegerField(default=0)
-    order = models.ForeignKey('Order', null=True, blank=True)
+#     order = models.ForeignKey('Order', null=True, blank=True)
     image = models.ImageField(upload_to='media/drink/', null=True, blank=True)
     descriptionm = models.TextField(max_length=400, help_text='Enter a short description of this drink', null=True, blank=True)
 
@@ -49,5 +49,9 @@ class Drink(models.Model):
 class Order(models.Model):
     user = models.ForeignKey(User)
     date = models.DateField(auto_now=True)
-    quantity = models.PositiveIntegerField(default=0)
+    food = models.ForeignKey('Food', null=True, blank=True)
+    drink = models.ForeignKey('Drink', null=True, blank=True)
+    food_quantity = models.PositiveIntegerField(default=0)
+    drink_quantity = models.PositiveIntegerField(default=0)
+    
 
